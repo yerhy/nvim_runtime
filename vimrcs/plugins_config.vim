@@ -185,3 +185,14 @@ map <leader>m :FZFMru<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>r :FloatermNew ranger<cr>
 map <leader>f :FloatermNew fzf<CR> 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => papercolor-theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
