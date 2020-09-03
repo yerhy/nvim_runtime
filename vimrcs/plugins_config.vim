@@ -2,6 +2,7 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.config/nvim/nvim_runtime/plugged')
+Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -13,7 +14,35 @@ Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'mileszs/ack.vim'
 Plug 'yegappan/mru'
+Plug 'amix/open_file_under_cursor.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'voldikss/vim-floaterm'
 call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-startify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:startify_lists = [
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+
+let g:ascii = [
+          \ '        __',
+          \ '.--.--.|__|.--------.',
+          \ '|  |  ||  ||        |',
+          \ ' \___/ |__||__|__|__|',
+          \ '',
+          \ '帮助乌干达的可怜儿童',
+          \]
+let g:startify_custom_header =
+          \ 'startify#center(g:ascii + startify#fortune#boxed())'
+" let g:startify_custom_header =
+"       \ 'startify#center(startify#fortune#cowsay())'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,7 +146,7 @@ let g:fzf_colors =
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-map <leader>f :FZF<CR> 
+"map <leader>f :FZF<CR> 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 "xmap <leader><tab> <plug>(fzf-maps-x)
@@ -135,7 +164,7 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 " => ranger-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ranger_map_keys = 0
-map <leader>r :Ranger<cr>
+"map <leader>r :Ranger<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ack-vim
@@ -145,6 +174,13 @@ if executable('ag')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ack-vim
+" => MRU
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>m :FZFMru<cr>
+"map <leader>m :FZFMru<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-floatterm
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>r :FloatermNew ranger<cr>
+map <leader>f :FloatermNew fzf<CR> 
