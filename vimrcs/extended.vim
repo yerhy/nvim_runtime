@@ -30,6 +30,7 @@ set guioptions-=L
 " Colorscheme
 set background=dark
 "colorscheme ir_black    
+colorscheme PaperColor  
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
