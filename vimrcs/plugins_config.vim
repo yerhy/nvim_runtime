@@ -3,6 +3,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.config/nvim/nvim_runtime/plugged')
 Plug 'mhinz/vim-startify'
+Plug 'xolox/vim-misc'
 Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -18,6 +19,8 @@ Plug 'amix/open_file_under_cursor.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'voldikss/vim-floaterm'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'xolox/vim-notes'
+Plug 'vim-scripts/fcitx.vim'
 call plug#end()
 
 
@@ -196,3 +199,4 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
+
