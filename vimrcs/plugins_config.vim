@@ -188,6 +188,7 @@ map <leader>m :FZFMru<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>r :FloatermNew ranger<cr>
 map <leader>f :FloatermNew fzf<CR> 
+map <leader>t :FloatermNew <CR> 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => papercolor-theme
