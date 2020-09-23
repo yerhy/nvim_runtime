@@ -21,6 +21,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'xolox/vim-notes'
 Plug 'vim-scripts/fcitx.vim'
+Plug 'brooth/far.vim'
 call plug#end()
 
 
