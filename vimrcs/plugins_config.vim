@@ -22,6 +22,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'xolox/vim-notes'
 Plug 'vim-scripts/fcitx.vim'
 Plug 'brooth/far.vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
@@ -202,3 +203,8 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_fileTpe = ['py', 'yaml', 'yml', 'go']
