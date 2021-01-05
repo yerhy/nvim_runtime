@@ -18,6 +18,11 @@ au FileType python map <buffer> <leader>2 /def
 au FileType python map <buffer> <leader>C ?class 
 au FileType python map <buffer> <leader>D ?def 
 
+au FileType python call PythonFold()
+function! PythonFold() 
+    setl foldmethod=indent
+endfunction
+
 
 """"""""""""""""""""""""""""""
 " => JavaScript section
