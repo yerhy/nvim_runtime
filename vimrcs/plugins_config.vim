@@ -187,6 +187,7 @@ map <leader>b :Buffers<cr>
 map <leader>w :Windows<cr>
 map <leader>M :Marks<cr>
 map <leader>h :History<cr>
+map <leader>t :Tags<CR> 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -194,7 +195,6 @@ map <leader>h :History<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map <leader>r :FloatermNew ranger<cr>
 map <leader>f :FloatermNew fzf<CR> 
-map <leader>t :FloatermNew <CR> 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => papercolor-theme
