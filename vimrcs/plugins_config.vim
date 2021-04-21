@@ -23,6 +23,7 @@ Plug 'xolox/vim-notes'
 Plug 'vim-scripts/fcitx.vim'
 Plug 'brooth/far.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 
