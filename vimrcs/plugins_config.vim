@@ -171,7 +171,7 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 " => ranger-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ranger_map_keys = 0
-"map <leader>r :Ranger<cr>
+map <leader>r :Ranger<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ack-vim
@@ -192,7 +192,7 @@ map <leader>h :History<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-floatterm
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>r :FloatermNew ranger<cr>
+" map <leader>r :FloatermNew ranger<cr>
 map <leader>f :FloatermNew fzf<CR> 
 map <leader>t :FloatermNew <CR> 
 
