@@ -185,7 +185,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>b :Buffers<cr>
 map <leader>w :Windows<cr>
-map <leader>M :Marks<cr>
+map <leader>m :Marks<cr>
 map <leader>h :History<cr>
 map <leader>t :Tags<CR> 
 
