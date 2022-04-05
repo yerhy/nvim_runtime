@@ -20,10 +20,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'voldikss/vim-floaterm'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'xolox/vim-notes'
-Plug 'vim-scripts/fcitx.vim'
+" Plug 'vim-scripts/fcitx.vim'
 Plug 'brooth/far.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
+Plug 'github/copilot.vim'
 call plug#end()
 
 
