@@ -219,3 +219,11 @@ let g:indentLine_fileTpe = ['py', 'yaml', 'yml', 'go']
 " => coc-nvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>c :CocCommand 
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => copilot
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
