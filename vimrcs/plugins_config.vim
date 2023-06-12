@@ -25,6 +25,7 @@ Plug 'brooth/far.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
 Plug 'github/copilot.vim'
+Plug 'zenbro/mirror.vim'
 call plug#end()
 
 
