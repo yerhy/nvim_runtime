@@ -228,3 +228,22 @@ map <leader>c :CocCommand
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 " let g:copilot_no_tab_map = v:true
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => mirror.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :MirrorEnvironment - show default environment for current project.
+" :MirrorEnvironment <environment> - set default <environment> for current session.
+" :MirrorEnvironment! <environment> - set default <environment> globally.
+" :MirrorEdit <environment> - open remote version of a local file.
+" :MirrorDiff <environment> - open vertical split with difference between remote and local file. Use :diffoff to exit diff mode. Use g:mirror#diff_layout to change default split layout for this command.
+" :MirrorPush <environment> - overwrite remote file by local file. If you are using neovim, the command will be executed asynchronously, otherwise synchronously.
+" :MirrorPull <environment> - overwrite local file by remote file. If you are using neovim, the command will be executed asynchronously, otherwise synchronously.
+" :MirrorOpen <environment> - open remote project directory in file explorer (netrw).
+" :MirrorRoot <environment> - open remote system root directory in file explorer.
+" :MirrorParentDir <environment> - open remote parent directory of local file.
+" :MirrorSSH <environment> - establish ssh connection with selected <environment> and jump to the remote project directory. Use g:mirror#ssh_auto_cd to change default behaviour. See also g:mirror#ssh_shell. If you are using neovim, the command will be executed in a new terminal buffer.
+" :MirrorInfo <environment> - get information about remote file.
+let g:mirror#config_path = expand('~/.config/.mirrors')
