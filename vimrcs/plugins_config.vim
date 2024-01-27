@@ -26,6 +26,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
 Plug 'github/copilot.vim'
 Plug 'zenbro/mirror.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
