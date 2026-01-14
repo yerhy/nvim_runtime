@@ -27,6 +27,7 @@ Plug 'mattn/emmet-vim'
 Plug 'github/copilot.vim'
 Plug 'zenbro/mirror.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'folke/which-key.nvim'
 call plug#end()
 
 
@@ -252,3 +253,52 @@ map <leader>c :CocCommand
 " :MirrorSSH <environment> - establish ssh connection with selected <environment> and jump to the remote project directory. Use g:mirror#ssh_auto_cd to change default behaviour. See also g:mirror#ssh_shell. If you are using neovim, the command will be executed in a new terminal buffer.
 " :MirrorInfo <environment> - get information about remote file.
 let g:mirror#config_path = expand('~/.config/.mirrors')
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => which-key.nvim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua << EOF
+local wk_ok, wk = pcall(require, "which-key")
+if wk_ok then
+  wk.setup {
+    plugins = {
+      marks = true,
+      registers = true,
+      spelling = { enabled = false },
+      presets = {
+        operators = true,
+        motions = true,
+        text_objects = true,
+        windows = true,
+        nav = true,
+        z = true,
+        g = true,
+      },
+    },
+    win = {
+      border = "rounded",
+      padding = { 2, 2, 2, 2 },
+    },
+  }
+  
+  wk.add({
+    { "<leader>n", group = "NERDTree" },
+    { "<leader>nn", desc = "Toggle NERDTree" },
+    { "<leader>nf", desc = "Find current file" },
+    { "<leader>nb", desc = "Open from bookmark" },
+    { "<leader>b", desc = "Buffers (fzf)" },
+    { "<leader>w", desc = "Windows (fzf)" },
+    { "<leader>m", desc = "Marks (fzf)" },
+    { "<leader>h", desc = "History (fzf)" },
+    { "<leader>t", desc = "Tags (fzf)" },
+    { "<leader>f", desc = "Floaterm fzf" },
+    { "<leader>r", desc = "Ranger" },
+    { "<leader>z", desc = "Goyo (Zen mode)" },
+    { "<leader>c", desc = "CocCommand" },
+  })
+end
+EOF
+
+
+
