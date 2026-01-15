@@ -23,6 +23,7 @@ Plug 'amix/open_file_under_cursor.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'voldikss/vim-floaterm'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'folke/tokyonight.nvim'
 " Plug 'norcalli/nvim-colorizer.lua'
 Plug 'xolox/vim-notes'
 " Plug 'vim-scripts/fcitx.vim'
