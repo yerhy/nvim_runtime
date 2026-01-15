@@ -4,7 +4,11 @@
 call plug#begin('~/.config/nvim/nvim_runtime/plugged')
 Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-misc'
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'  " 已替换为 neo-tree
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
@@ -19,6 +23,7 @@ Plug 'amix/open_file_under_cursor.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'voldikss/vim-floaterm'
 Plug 'NLKNguyen/papercolor-theme'
+" Plug 'norcalli/nvim-colorizer.lua'
 Plug 'xolox/vim-notes'
 " Plug 'vim-scripts/fcitx.vim'
 Plug 'brooth/far.vim'
@@ -57,20 +62,77 @@ let g:startify_custom_header =
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
+" => Neo-tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
-let NERDTreeShowLineNumbers=1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=20
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+lua << EOF
+local neotree_ok, neotree = pcall(require, "neo-tree")
+if neotree_ok then
+  neotree.setup({
+    close_if_last_window = true,
+    popup_border_style = "rounded",
+    window = {
+      position = "left",
+      width = 40,
+      mappings = {
+        ["<space>"] = "none",
+        ["o"] = "open",
+        ["s"] = "open_split",
+        ["v"] = "open_vsplit",
+        ["t"] = "open_tabnew",
+        ["a"] = "add",
+        ["d"] = "delete",
+        ["r"] = "rename",
+        ["c"] = "copy",
+        ["m"] = "move",
+        ["q"] = "close_window",
+        ["R"] = "refresh",
+        ["?"] = "show_help",
+      },
+    },
+    renderer = {
+      group_empty_dirs = false,
+      highlight_git = true,
+      highlight_modified = true,
+      indent_size = 2,
+      indent_markers = {
+        enable = true,
+      },
+      icons = {
+        git_placement = "signcolumn",
+      },
+      full_name = true,
+      truncate_to_fit = false,
+    },
+    filesystem = {
+      filtered_items = {
+        visible = false,
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_by_name = {
+          ".git",
+          "node_modules",
+          "__pycache__",
+        },
+      },
+      follow_current_file = {
+        enabled = true,
+      },
+      use_libuv_file_watcher = true,
+    },
+    git_status = {
+      window = {
+        position = "float",
+      },
+    },
+  })
+end
+EOF
+
+" Neo-tree 快捷键
+map <leader>nn :Neotree toggle<cr>
+map <leader>nf :Neotree reveal<cr>
+map <leader>ng :Neotree git_status<cr>
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,7 +281,7 @@ let g:PaperColor_Theme_Options = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_fileTpe = ['py', 'yaml', 'yml', 'go']
+let g:indentLine_fileType = ['py', 'yaml', 'yml', 'go']
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -283,10 +345,10 @@ if wk_ok then
   }
   
   wk.add({
-    { "<leader>n", group = "NERDTree" },
-    { "<leader>nn", desc = "Toggle NERDTree" },
-    { "<leader>nf", desc = "Find current file" },
-    { "<leader>nb", desc = "Open from bookmark" },
+    { "<leader>n", group = "Neo-tree" },
+    { "<leader>nn", desc = "Toggle Neo-tree" },
+    { "<leader>nf", desc = "Reveal current file" },
+    { "<leader>ng", desc = "Git status" },
     { "<leader>b", desc = "Buffers (fzf)" },
     { "<leader>w", desc = "Windows (fzf)" },
     { "<leader>m", desc = "Marks (fzf)" },
@@ -299,6 +361,33 @@ if wk_ok then
   })
 end
 EOF
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nvim-colorizer.lua (已禁用以提升大文件性能)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lua << EOF
+" local colorizer_ok, colorizer = pcall(require, "colorizer")
+" if colorizer_ok then
+"   colorizer.setup({
+"     filetypes = { '*', '!packer' },
+"     user_default_options = {
+"       RGB = true,
+"       RRGGBB = true,
+"       names = true,
+"       RRGGBBAA = false,
+"       rgb_fn = false,
+"       hsl_fn = false,
+"       css = false,
+"       css_fn = false,
+"       mode = 'background',
+"       tailwind = false,
+"       sass = { enable = false, parsers = { css = true } },
+"       virtualtext = '■',
+"     },
+"     buftypes = {},
+"   })
+" end
+" EOF
 
 
 
