@@ -405,7 +405,7 @@ EOF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
 local avante_config = {
-  provider = "copilot",  -- 默认使用 copilot
+  provider = "deepseek",  -- 默认使用 copilot
   auto_suggestions_provider = "copilot",
   behaviour = {
     auto_suggestions = true,  -- 启用自动建议
@@ -440,6 +440,7 @@ local avante_config = {
         temperature = 0,
         max_tokens = 4096,
       },
+      api_key_name = "DEEPSEEK_API_KEY",
     },
     glm = {
       __inherited_from = "openai",  -- 继承 openai 提供者（GLM API 兼容 OpenAI 格式）
