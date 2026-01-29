@@ -30,10 +30,19 @@ Plug 'xolox/vim-notes'
 Plug 'brooth/far.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'  " 暂时禁用，使用 avante.nvim 替代
 Plug 'zenbro/mirror.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => avante.nvim (多模型 AI 助手)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+Plug 'HakonHarnes/img-clip.nvim'
+Plug 'stevearc/dressing.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 call plug#end()
 
 
@@ -389,6 +398,170 @@ EOF
 "   })
 " end
 " EOF
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => avante.nvim 配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua << EOF
+local avante_config = {
+  provider = "copilot",  -- 默认使用 copilot
+  auto_suggestions_provider = "copilot",
+  behaviour = {
+    auto_suggestions = true,  -- 启用自动建议
+    auto_set_highlight_group = true,
+    set_cursor = true,
+    auto_set_keymaps = true,
+    auto_apply_diff_after_generation = false,
+  },
+  providers = {
+    copilot = {
+      endpoint = "https://api.githubcopilot.com",
+      model = "gpt-4o",  -- 使用 Copilot 支持的模型
+      proxy = nil,
+      allow_insecure = false,
+      timeout = 30000,
+    },
+    openai = {
+      endpoint = "https://api.openai.com/v1",
+      model = "gpt-4o",
+      timeout = 30000,
+      extra_request_body = {
+        temperature = 0,
+        max_tokens = 4096,
+      },
+    },
+    deepseek = {
+      __inherited_from = "openai",  -- 继承 openai 提供者（DeepSeek API 兼容 OpenAI 格式）
+      endpoint = "https://api.deepseek.com",
+      model = "deepseek-chat",  -- DeepSeek Chat 模型（Reasoner 需要特殊处理）
+      timeout = 30000,
+      extra_request_body = {
+        temperature = 0,
+        max_tokens = 4096,
+      },
+    },
+    glm = {
+      __inherited_from = "openai",  -- 继承 openai 提供者（GLM API 兼容 OpenAI 格式）
+      endpoint = "https://open.bigmodel.cn/api/paas/v4",
+      model = "glm-4",
+      timeout = 30000,
+      extra_request_body = {
+        temperature = 0,
+        max_tokens = 4096,
+      },
+      -- api_key = "your-glm-api-key",  -- 或使用环境变量 AVANTE_GLM_API_KEY
+    },
+  },
+  mappings = {
+    ask = "<leader>aa",
+    edit = "<leader>ae",
+    refresh = "<leader>ar",
+    focus = "<leader>af",
+    toggle = {
+      default = "<leader>at",
+      debug = "<leader>ad",
+      hint = "<leader>ah",
+      suggestion = "<leader>as",
+      repomap = "<leader>aR",
+    },
+    suggestion = {
+      accept = "<Tab>",        -- Tab 接受建议
+      next = "<M-]>",          -- Alt + ] 下一个建议
+      prev = "<M-[>",          -- Alt + [ 上一个建议
+      dismiss = "<C-]>",       -- Ctrl + ] 拒绝建议
+    },
+    sidebar = {
+      apply_all = "A",
+      apply = "a",
+      switch_windows = "<Tab>",
+      reverse_switch_windows = "<S-Tab>",
+    },
+  },
+  hints = { enabled = true },
+  windows = {
+    position = "right",
+    width = 30,
+    sidebar_header = {
+      align = "center",
+      rounded = true,
+    },
+    ask = {
+      floating = false,
+      start_insert = true,
+      border = "rounded",
+      opts = {},
+    },
+    edit = {
+      floating = false,
+      border = "rounded",
+    },
+  },
+  highlights = {
+    diff = {
+      add = { fg = "#c3e88d" },
+      remove = { fg = "#e07a5f" },
+      text = { fg = "#89b4fa" },
+    },
+  },
+}
+
+-- 加载 avante
+local avante_ok, avante = pcall(require, "avante")
+if avante_ok then
+  avante.setup(avante_config)
+  vim.keymap.set("n", "<leader>ap", function()
+    require("avante.api").ask({ provider = "copilot" })
+  end, { desc = "Ask with Copilot" })
+
+  vim.keymap.set("n", "<leader>ag", function()
+    require("avante.api").ask({ provider = "deepseek" })
+  end, { desc = "Ask with DeepSeek" })
+
+  vim.keymap.set("n", "<leader>az", function()
+    require("avante.api").ask({ provider = "glm" })
+  end, { desc = "Ask with GLM" })
+
+  vim.keymap.set("n", "<leader>ao", function()
+    require("avante.api").ask({ provider = "openai" })
+  end, { desc = "Ask with OpenAI" })
+end
+
+-- Treesitter 配置
+local treesitter_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+if treesitter_ok then
+  treesitter.setup({
+    ensure_installed = {
+      "vim", "vimdoc", "lua", "python", "javascript", "typescript",
+      "java", "go", "rust", "cpp", "c", "bash", "markdown", "markdown_inline"
+    },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+  })
+end
+
+-- img-clip.nvim 配置
+local img_clip_ok, img_clip = pcall(require, "img-clip")
+if img_clip_ok then
+  img_clip.setup({
+    default = {
+      dir_path = "img",
+      file_name = "%Y-%m-%d-%H-%M-%S",
+      use_absolute_path = false,
+      prompt_for_file_name = false,
+      drag_and_drop = {
+        insert_mode = true,
+      },
+    },
+  })
+end
+EOF
 
 
 
