@@ -30,7 +30,7 @@ Plug 'xolox/vim-notes'
 Plug 'brooth/far.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
-" Plug 'github/copilot.vim'  " 暂时禁用，使用 avante.nvim 替代
+Plug 'github/copilot.vim'  " 暂时禁用，使用 avante.nvim 替代
 Plug 'zenbro/mirror.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
@@ -303,7 +303,9 @@ map <leader>c :CocCommand
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => copilot
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fix copilot-language-server node:sqlite error (use compatible version)
+let g:copilot_version = '1.400.0'
 " imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 " let g:copilot_no_tab_map = v:true
 
